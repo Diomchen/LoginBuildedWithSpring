@@ -18,6 +18,9 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+    <context:component-scan base-package="com.smart.dao"/>
+    <context:component-scan base-package="com.smart.service"/>
+
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close"
           p:driverClassName="com.mysql.cj.jdbc.Driver"
           p:url="jdbc:mysql://localhost:3306/myspring?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false"
@@ -27,7 +30,18 @@
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
           p:dataSource-ref="dataSource"/>
 
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+          p:dataSource-ref="dataSource"/>
 
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*" />
+        </tx:attributes>
+    </tx:advice>
 
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="serviceMethod" expression="(execution(* com.smart.service..*(..))) and (@annotation(org.springframework.transaction.annotation.Transactional))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod" />
+    </aop:config>
 </beans>
 

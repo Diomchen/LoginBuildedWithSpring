@@ -4,10 +4,12 @@ import com.smart.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Repository
 public class UserDao {
     private JdbcTemplate jdbcTemplate;
 
@@ -31,7 +33,7 @@ public class UserDao {
                 new RowCallbackHandler(){
                     public void processRow(ResultSet rs) throws SQLException {
                         user.setUserId(rs.getInt("userId"));
-                        user.setUsername(username);
+                        user.setUserName(username);
                         user.setCredits(rs.getInt("credits"));
                     }
                 });

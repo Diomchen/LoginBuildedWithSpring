@@ -5,7 +5,10 @@ import com.smart.dao.UserDao;
 import com.smart.domain.LoginLog;
 import com.smart.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class UserService {
     private UserDao userDao;
     private LoginLogDao loginLogDao;
@@ -32,8 +35,15 @@ public class UserService {
         userDao.updateLoginInfo(user);
     }
 
-    public void insertLoginLog(LoginLogDao loginLogDao){
-//        loginLogDao.insertLoginLog();
+    @Transactional
+    public void insertsuccess(User user){
+        user.setCredits(5 + user.getCredits());
+        LoginLog loginLog = new LoginLog();
+        loginLog.setUserId(user.getUserId());
+        loginLog.setIp(user.getLastIp());
+        loginLog.setLoginDate(user.getLastVisit());
+        userDao.updateLoginInfo(user);
+        loginLogDao.insertLoginLog(loginLog);
     }
 
 }
