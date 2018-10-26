@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+//@Service 作用于业务逻辑层，主要是让smart-context.xml中的component-scan找到
 public class UserService {
     private UserDao userDao;
     private LoginLogDao loginLogDao;

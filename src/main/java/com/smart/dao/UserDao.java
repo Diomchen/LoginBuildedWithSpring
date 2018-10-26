@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Repository
+//@Repository作用于持久层，主要是让smart-context.xml中的component-scan找到
+
 public class UserDao {
     private JdbcTemplate jdbcTemplate;
 

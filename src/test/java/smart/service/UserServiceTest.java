@@ -11,6 +11,7 @@ import static org.testng.Assert.*;
 
 
 @ContextConfiguration("classpath*:/smart-context.xml")
+//这个主要是用来启动spring容器
 public class UserServiceTest extends AbstractTransactionalTestNGSpringContextTests {
 
     @Autowired
@@ -18,8 +19,9 @@ public class UserServiceTest extends AbstractTransactionalTestNGSpringContextTes
 
     @Test
     public void testHasMatchUser() {
-        boolean b1 = userService.hasMatchUser("admin", "123456");
+        boolean b1 = userService.hasMatchUser("admin", "12345");
         assertTrue(b1);
+
     }
 
     @Test
