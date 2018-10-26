@@ -6,6 +6,9 @@
         <fileset id="fileset" name="Smart Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/resources/smart-context.xml</file>
         </fileset>
+        <fileset id="fileset2" name="Smart Servlet" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/smart-servlet.xml</file>
+        </fileset>
       </configuration>
     </facet>
   </component>
