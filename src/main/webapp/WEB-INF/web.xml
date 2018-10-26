@@ -7,12 +7,15 @@
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
+    <!--这里是从类路径下加载Spring配置文件，classpath关键字特指类路径下加载-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath:smart-servlet.xml
+            classpath:smart-context.xml
         </param-value>
     </context-param>
+
+    <!--启动spring容器的监听器，他将引用上面的参数获得spring配置文件的地址-->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
